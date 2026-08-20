@@ -2,6 +2,34 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public static Player Instance;
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+    }
+    public static Transform Transform
+    {
+        get
+        {
+            return Instance.transform;
+        }
+    }
+    public static Vector3 Position
+    {
+        get
+        {
+            return Instance.transform.position;
+        }
+    }
+
+
     Vector3 dir = Vector3.zero;
     [SerializeField] float speed = 5f;
     void Update()

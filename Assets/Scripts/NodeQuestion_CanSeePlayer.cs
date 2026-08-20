@@ -1,16 +1,32 @@
 using UnityEngine;
+using IA1.DesitionTreeUnity.Core;
 
 public class NodeQuestion_CanSeePlayer : NodeQuestion
 {
+    [Header("CanSeePlayer")]
     [SerializeField] Transform owner;
-    [SerializeField] Transform target;
-
     [SerializeField] float minDistToSee = 2f;
+
+    bool canSee = false;
 
     public override bool Predicate()
     {
-        Vector3 dir = target.position - owner.position;
+        Vector3 dir = Player.Position - owner.position;
 
-        return dir.sqrMagnitude < minDistToSee * minDistToSee;
+        canSee = dir.sqrMagnitude < minDistToSee * minDistToSee;
+
+        return canSee;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+
+        if (!Player.Instance) return;
+
+        Gizmos.color = canSee ? Color.cyan : Color.grey;
+
+        Gizmos.DrawLine(transform.position, Player.Position);
+
+        
     }
 }
