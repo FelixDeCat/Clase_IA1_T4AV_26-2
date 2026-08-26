@@ -3,8 +3,8 @@ using IA1.DesitionTreeCSharpNative;
 
 public class Enemy : MonoBehaviour
 {
-    //[SerializeField] IA1.DesitionTreeUnity.Core.Node firstNode;
-    Node first;
+    [SerializeField] IA1.DesitionTreeUnity.Core.Node firstNode;
+    //Node first;
 
 
 
@@ -24,36 +24,33 @@ public class Enemy : MonoBehaviour
 
         //first = new NodeQuestion(CanSeePlayer, inRange, patrol);
 
+        //NodeExecute patrol = new NodeExecute(() => print("Estoy patruyando"));
+        //NodeExecute attack = new NodeExecute(() =>
+        //{
+        //    print("me acerco");
+        //    print("anticipacion");
+        //    print("atack");
+        //    print("recoil");
+        //}
+        //);
+        //NodeExecute follow = new NodeExecute(FollowAction);
 
+        //NodeQuestion inRange = new NodeQuestion(
+        //    () =>
+        //    {
+        //        Vector3 dir = Player.Position - transform.position;
+        //        return dir.sqrMagnitude < minDistToSee * minDistToSee;
+        //    }
+        //    , attack, follow);
 
-
-        NodeExecute patrol = new NodeExecute(() => print("Estoy patruyando"));
-        NodeExecute attack = new NodeExecute(() =>
-        {
-            print("me acerco");
-            print("anticipacion");
-            print("atack");
-            print("recoil");
-        }
-        );
-        NodeExecute follow = new NodeExecute(FollowAction);
-
-        NodeQuestion inRange = new NodeQuestion(
-            () =>
-            {
-                Vector3 dir = Player.Position - transform.position;
-                return dir.sqrMagnitude < minDistToSee * minDistToSee;
-            }
-            , attack, follow);
-
-        first = new NodeQuestion(CanSeePlayer, inRange, patrol);
+        //first = new NodeQuestion(CanSeePlayer, inRange, patrol);
     }
 
     void Update()
     {
-        //firstNode.Execute();
+        firstNode.Execute();
 
-        first.Execute();
+        //first.Execute();
     }
 
 

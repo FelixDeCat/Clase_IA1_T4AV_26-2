@@ -32,6 +32,7 @@ public class NodeExecute_Patrol : NodeExecute
 
         dir.Normalize();
         owner.position += dir * Time.deltaTime * speed;
+        owner.forward = Vector3.Slerp(owner.forward , dir, 0.1f);
     }
 
 }

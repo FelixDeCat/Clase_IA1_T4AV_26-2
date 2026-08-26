@@ -9,13 +9,17 @@ public class NodeQuestion_CanSeePlayer : NodeQuestion
 
     bool canSee = false;
 
+    [SerializeField] FieldOfView fov;
+
     public override bool Predicate()
     {
-        Vector3 dir = Player.Position - owner.position;
+        //Vector3 dir = Player.Position - owner.position;
 
-        canSee = dir.sqrMagnitude < minDistToSee * minDistToSee;
+        //canSee = dir.sqrMagnitude < minDistToSee * minDistToSee;
 
-        return canSee;
+        //return canSee;
+
+        return fov.Query();
     }
 
     private void OnDrawGizmosSelected()
