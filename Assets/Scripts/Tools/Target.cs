@@ -46,7 +46,9 @@ public class Target : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, float.MaxValue, 1 << floorLayer))
             {
-                transform.position = hit.point;
+                adjust = hit.point;
+                adjust.y = 0;
+                transform.position = adjust;
                 transform.localScale = Vector3.one;
                 onClickGO.SetActive(true);
             }
@@ -70,7 +72,7 @@ public class Target : MonoBehaviour
 
         transform.position += velocity * Time.deltaTime;
         adjust = transform.position;
-        //adjust.y = 0;
+        adjust.y = 0;
         transform.position = adjust;
 
 
@@ -79,5 +81,13 @@ public class Target : MonoBehaviour
             transform.localScale = Vector3.one * 0.5f;
             onClickGO.SetActive(false);
         }
+    }
+
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.cyan;
+
+        if(velocity != Vector3.zero) Gizmos.DrawLine(transform.position, transform.position + velocity);
     }
 }
