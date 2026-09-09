@@ -14,6 +14,12 @@ public class Player : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+    Transform camtransf;
+    [SerializeField] Vector3 camOffset;
+    private void Start()
+    {
+        camtransf = Camera.main.transform;
+    }
     public static Transform Transform
     {
         get
@@ -39,9 +45,15 @@ public class Player : MonoBehaviour
 
         transform.position += dir.normalized * Time.deltaTime * speed;
 
-        if (Mathf.Abs(dir.sqrMagnitude) > 0.1f)
+        if (Mathf.Abs(dir.sqrMagnitude) > 0.01f)
         {
-            transform.forward = Vector3.Lerp(transform.forward, dir, 0.1f) ;
+            transform.forward = Vector3.Lerp(transform.forward, dir, 0.1f);
         }
+    }
+
+    
+    private void LateUpdate()
+    {
+        camtransf.position = this.transform.position + camOffset;
     }
 }
