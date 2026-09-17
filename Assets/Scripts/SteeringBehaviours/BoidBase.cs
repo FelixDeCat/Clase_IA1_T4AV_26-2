@@ -33,6 +33,8 @@ public abstract class BoidBase : MonoBehaviour
         }
     }
 
+   
+
 
     private void OnDrawGizmosSelected()
     {
