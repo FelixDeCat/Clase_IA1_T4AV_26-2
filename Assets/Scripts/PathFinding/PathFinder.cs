@@ -8,16 +8,20 @@ public class PathFinder : MonoBehaviour
     float mostClose = float.MaxValue;
     Node best = null;
 
+    [SerializeField] bool drawOrigin = false;
+
+    Vector3 origin_to_draw = Vector3.zero;
+
     private void Start()
     {
-        Target.instance.SubscribeToEndClick(OnEndClikc);
+        Target.instance.SubscribeToEndClick(OnEndClick);
     }
 
-    void OnEndClikc()
+    void OnEndClick()
     {
         Node targetNode = FindMostCloseNode(Target.Position);
-
-        Debug.Log(targetNode);
+        if (targetNode != null) origin_to_draw = targetNode.transform.position;
+        else origin_to_draw = Vector3.zero;
     }
 
     public void MoveTo(Vector3 pos)
@@ -51,8 +55,12 @@ public class PathFinder : MonoBehaviour
         return best;
     }
 
-    void Update()
+    private void OnDrawGizmos()
     {
-        
+        if (drawOrigin && origin_to_draw != Vector3.zero)
+        {
+            Gizmos.color = Color.cyan;
+            Gizmos.DrawSphere(origin_to_draw + Vector3.up / 3, 0.2f);
+        }
     }
 }

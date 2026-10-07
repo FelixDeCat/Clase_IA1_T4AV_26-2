@@ -131,6 +131,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Target
       objectReference: {fileID: 0}
+    - target: {fileID: 7721113921638539811, guid: 9aceedb4ae871674da68b8ac2f3bb0d5, type: 3}
+      propertyPath: mask_to_click.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
     - target: {fileID: 8372609928102695618, guid: 9aceedb4ae871674da68b8ac2f3bb0d5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -219,9 +223,9 @@ MonoBehaviour:
   drawConnections: 1
   drawDetRadius: 0
   neighbors:
+  - {fileID: 1347222389}
   - {fileID: 503002742}
   - {fileID: 1409658011}
-  - {fileID: 1347222389}
   detectionRadius: 2
 --- !u!135 &300431174
 SphereCollider:
@@ -395,9 +399,9 @@ MonoBehaviour:
   drawDetRadius: 0
   neighbors:
   - {fileID: 1900581311}
-  - {fileID: 1716348792}
-  - {fileID: 1954633379}
   - {fileID: 1716036567}
+  - {fileID: 1954633379}
+  - {fileID: 1716348792}
   detectionRadius: 2
 --- !u!135 &339279217
 SphereCollider:
@@ -479,8 +483,8 @@ MonoBehaviour:
   drawDetRadius: 0
   neighbors:
   - {fileID: 300431173}
-  - {fileID: 1347222389}
   - {fileID: 780573761}
+  - {fileID: 1347222389}
   detectionRadius: 2
 --- !u!135 &503002743
 SphereCollider:
@@ -599,6 +603,55 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1589993378}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &721019641
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 721019643}
+  - component: {fileID: 721019642}
+  m_Layer: 0
+  m_Name: PathFinder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &721019642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 721019641}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93fe96aef57003941833eab942bbe286, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  detectionRadius: 2
+  nodeMask:
+    serializedVersion: 2
+    m_Bits: 512
+  drawOrigin: 1
+--- !u!4 &721019643
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 721019641}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &780573760
 GameObject:
   m_ObjectHideFlags: 0
@@ -642,10 +695,10 @@ MonoBehaviour:
   drawConnections: 1
   drawDetRadius: 0
   neighbors:
-  - {fileID: 2107564785}
-  - {fileID: 503002742}
   - {fileID: 1716348792}
+  - {fileID: 2107564785}
   - {fileID: 1347222389}
+  - {fileID: 503002742}
   detectionRadius: 2
 --- !u!135 &780573762
 SphereCollider:
@@ -870,8 +923,8 @@ MonoBehaviour:
   drawDetRadius: 0
   neighbors:
   - {fileID: 300431173}
-  - {fileID: 503002742}
   - {fileID: 780573761}
+  - {fileID: 503002742}
   detectionRadius: 2
 --- !u!135 &1347222390
 SphereCollider:
@@ -1049,7 +1102,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   execute: 0
-  update: 1
+  update: 0
   nodes:
   - {fileID: 503002742}
   - {fileID: 300431173}
@@ -1191,9 +1244,9 @@ MonoBehaviour:
   drawDetRadius: 0
   neighbors:
   - {fileID: 339279216}
-  - {fileID: 2107564785}
-  - {fileID: 1954633379}
   - {fileID: 1716036567}
+  - {fileID: 1954633379}
+  - {fileID: 2107564785}
   - {fileID: 780573761}
   detectionRadius: 2
 --- !u!135 &1716348793
@@ -1307,7 +1360,7 @@ Transform:
   m_GameObject: {fileID: 1839267133}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.49903, y: 0.959008, z: -0.26033962}
+  m_LocalPosition: {x: -7.4989195, y: 0.9590075, z: -0.2603742}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1548,8 +1601,8 @@ MonoBehaviour:
   neighbors:
   - {fileID: 1900581311}
   - {fileID: 339279216}
-  - {fileID: 2107564785}
   - {fileID: 1716348792}
+  - {fileID: 2107564785}
   detectionRadius: 2
 --- !u!135 &1954633380
 SphereCollider:
@@ -1916,8 +1969,8 @@ MonoBehaviour:
   drawConnections: 1
   drawDetRadius: 0
   neighbors:
-  - {fileID: 1716348792}
   - {fileID: 1954633379}
+  - {fileID: 1716348792}
   - {fileID: 780573761}
   detectionRadius: 2
 --- !u!135 &2107564786
@@ -1964,3 +2017,4 @@ SceneRoots:
   - {fileID: 948186587}
   - {fileID: 4490928}
   - {fileID: 1589993378}
+  - {fileID: 721019643}

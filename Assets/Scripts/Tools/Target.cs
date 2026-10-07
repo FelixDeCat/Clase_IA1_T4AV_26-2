@@ -7,7 +7,9 @@ public class Target : MonoBehaviour
     [SerializeField] float speed = 1f;
     [SerializeField] GameObject onClickGO;
 
-    [SerializeField] int floorLayer = 6;
+    [SerializeField] LayerMask mask_to_click;
+
+    [SerializeField] bool adjustToZero = false;
 
     Vector3 velocity;
     public static Vector3 Velocity
@@ -44,10 +46,10 @@ public class Target : MonoBehaviour
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, float.MaxValue, 1 << floorLayer))
+            if (Physics.Raycast(ray, out hit, float.MaxValue, mask_to_click, queryTriggerInteraction: QueryTriggerInteraction.Ignore))
             {
                 adjust = hit.point;
-                adjust.y = 0;
+                if (adjustToZero) adjust.y = 0;
                 transform.position = adjust;
                 transform.localScale = Vector3.one;
                 onClickGO.SetActive(true);
@@ -71,10 +73,13 @@ public class Target : MonoBehaviour
         velocity = dir * speed;
 
         transform.position += velocity * Time.deltaTime;
-        adjust = transform.position;
-        adjust.y = 0;
-        transform.position = adjust;
 
+        if (adjustToZero)
+        {
+            adjust = transform.position;
+            adjust.y = 0;
+            transform.position = adjust;
+        }
 
         if (!Input.GetMouseButton(0) && dir.magnitude < 0.1f)
         {
