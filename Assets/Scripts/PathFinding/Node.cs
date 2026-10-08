@@ -21,6 +21,16 @@ public class Node : MonoBehaviour
         }
     }
 
+    Node parent;
+    public Node Parent
+    {
+        get { return parent; }
+    }
+    public void SetParent(Node nparent)
+    {
+        parent = nparent;
+    }
+
     [SerializeField] float detectionRadius = 2f;
 
     public void BakeN()
@@ -29,7 +39,7 @@ public class Node : MonoBehaviour
         Detect();
     }
 
-    Node parent;
+    
 
     public void Clean()
     {
