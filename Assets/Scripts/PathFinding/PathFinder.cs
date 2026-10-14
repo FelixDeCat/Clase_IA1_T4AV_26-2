@@ -34,7 +34,6 @@ public class PathFinder : BoidBase
         if (nodeOrigin != null) origin_to_draw = nodeOrigin.transform.position;
         else origin_to_draw = Vector3.zero;
 
-
         // Nodo cercano al Click
         Node nodeFinal = FindMostCloseNode(Target.Position);
         if (nodeFinal != null) final_to_draw = nodeFinal.transform.position;
@@ -51,17 +50,17 @@ public class PathFinder : BoidBase
         }
     }
 
-    List<Node> BFS(Node initial, Node final)
+    List<Node> BFS(Node initial, Node final)  /// Busqueda en Anchura
     {
         foreach (var n in NodeBaker.Instance.Nodes)
         {
             n.Clean();
         }
 
-        Queue<Node> open = new Queue<Node>();
-        List<Node> visited = new List<Node>();
+        Queue<Node> open = new Queue<Node>(); // desencolar en orden y setear el current (actual)
+        List<Node> visited = new List<Node>(); // sirve para no revisitar (en momento de explode de vecinos)
 
-        open.Enqueue(initial);
+        open.Enqueue(initial); 
         visited.Add(initial);
 
         while (open.Count > 0)
