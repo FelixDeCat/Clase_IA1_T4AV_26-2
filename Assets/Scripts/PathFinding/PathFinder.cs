@@ -41,7 +41,7 @@ public class PathFinder : BoidBase
 
         if(path == null) path = new List<Node>();
         path.Clear();
-        path = BFS(nodeOrigin, nodeFinal);
+        path = Dijkstra(nodeOrigin, nodeFinal);
 
         if (path != null)
         {
@@ -49,6 +49,50 @@ public class PathFinder : BoidBase
             walk = true;
         }
     }
+
+    List<Node> Dijkstra(Node initial, Node final)
+    {
+        foreach (var n in NodeBaker.Instance.Nodes)
+        {
+            n.Clean();
+        }
+
+        PriorityQueue<Node> opens = new PriorityQueue<Node>();
+        List<Node> visited = new List<Node>();
+
+        initial.SetCost(0);
+        opens.Enqueue(initial, 0);
+
+        while (opens.Count > 0)
+        {
+            Node current = opens.Dequeue();
+
+            if (current == final)
+            {
+                return Reconstruct(initial, final);
+            }
+
+            visited.Add(current);
+
+            //explode
+            foreach (Node n in current.Neighbors)
+            {
+                if (visited.Contains(n)) continue;
+
+                float newCost = current.Cost + Vector3.Distance(current.transform.position, n.transform.position);
+
+                if (newCost < n.Cost)
+                {
+                    n.SetCost(newCost);
+                    n.SetParent(current);
+                    opens.Enqueue(n, newCost);
+                }
+            }
+        }
+
+        return null;
+    }
+
 
     List<Node> BFS(Node initial, Node final)  /// Busqueda en Anchura
     {
@@ -86,6 +130,8 @@ public class PathFinder : BoidBase
 
         return null;
     }
+
+
 
 
     List<Node> Reconstruct(Node initial, Node final)

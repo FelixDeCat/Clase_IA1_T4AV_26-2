@@ -21,6 +21,19 @@ public class Node : MonoBehaviour
         }
     }
 
+    float cost; /// cost = g
+    public float Cost
+    {
+        get
+        {
+            return cost;
+        }
+    }
+    public void SetCost(float newCost)
+    {
+        cost = newCost;
+    }
+
     Node parent;
     public Node Parent
     {
@@ -44,6 +57,7 @@ public class Node : MonoBehaviour
     public void Clean()
     {
         parent = null;
+        cost = float.MaxValue;
         // limpiar costos
         // limpiar costo final
         // limpiar visitados
